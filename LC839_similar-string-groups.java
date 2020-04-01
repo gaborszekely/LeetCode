@@ -49,6 +49,8 @@ class Solution {
   }
 
   private Boolean singleSwap(String a, String b) {
+    if (a == b) return true;
+
     int edits = 0;
 
     for (int i = 0; i < a.length(); ++i) {
@@ -58,6 +60,6 @@ class Solution {
         return false;
     }
 
-    return edits == 0 || edits == 2;
+    return edits == 2;
   }
 }

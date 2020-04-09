@@ -8,10 +8,10 @@ class OptimizedSolution {
         int[] maxSumsToRight = getMaxSumsToRight(prefixSums, 0, A.length - M, M);
 
         for (int i = L - 1; i < A.length; ++i) {
-            int r1 = prefixSums.findRangeSum(i - L + 1, i);
+            int lRangeSum = prefixSums.findRangeSum(i - L + 1, i);
             int leftMax = get(maxSumsToLeft, i - L);
             int rightMax = get(maxSumsToRight, i + 1);
-            max = Math.max(max, Math.max(r1 + leftMax, r1 + rightMax));
+            max = Math.max(max, Math.max(lRangeSum + leftMax, lRangeSum + rightMax));
         }
 
         return max;

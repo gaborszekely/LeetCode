@@ -2,10 +2,10 @@ import java.util.*;
 
 class Solution {
     public int lastStoneWeight(int[] stones) {
-        Comparator<Integer> numComparator = (a, b) -> {
+        final Comparator<Integer> numComparator = (a, b) -> {
             return b - a;
         };
-        PriorityQueue<Integer> pq = new PriorityQueue<>(numComparator);
+        final PriorityQueue<Integer> pq = new PriorityQueue<>(stones.length, numComparator);
 
         for (int stone : stones) {
             pq.add(stone);

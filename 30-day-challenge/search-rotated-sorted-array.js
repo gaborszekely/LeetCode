@@ -8,14 +8,12 @@
 /**
  * Utility functions
  */
-
 const getOrDefault = (n, defaultVal) => (n != null ? n : defaultVal);
 const curry = (fn, ...args) => (...args2) => fn(...args, ...args2);
 
 /**
  * Helpers
  */
-
 const findPivotIndex = (nums) => {
   let i = 0,
     j = nums.length - 1;
@@ -45,7 +43,6 @@ const binarySearch = (nums, target, i, j) => {
 /**
  * Solution
  */
-
 const search = (nums, target) => {
   const find = curry(binarySearch, nums, target);
   const pivotIndex = findPivotIndex(nums);

@@ -25,7 +25,7 @@ class Solution {
      */
     public int longestCommonSubsequenceRec(final String text1, final String text2) {
         final int[][] dp = new int[text1.length()][text2.length()];
-        boolean[][] visited = new boolean[text1.length()][text2.length()];
+        final boolean[][] visited = new boolean[text1.length()][text2.length()];
         return recurse(text2, text2, 0, 0, dp, visited);
     }
 

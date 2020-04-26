@@ -3,7 +3,7 @@ class Solution {
      * Approach #1: Bottom-up using tabulation
      */
     public int longestCommonSubsequence(final String text1, final String text2) {
-        final int[][] dp = new int[text1.length() - 1][text2.length() + 1];
+        final int[][] dp = new int[text1.length() + 1][text2.length() + 1];
 
         for (int i = 0; i <= text1.length(); ++i) {
             for (int j = 0; j <= text2.length(); ++j) {
@@ -24,7 +24,7 @@ class Solution {
      * Approach #2: Top-down using recursion with memoization
      */
     public int longestCommonSubsequenceRec(final String text1, final String text2) {
-        int[][] dp = new int[text1.length()][text2.length()];
+        final int[][] dp = new int[text1.length()][text2.length()];
         boolean[][] visited = new boolean[text1.length()][text2.length()];
         return recurse(text2, text2, 0, 0, dp, visited);
     }

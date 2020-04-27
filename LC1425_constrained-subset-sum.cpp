@@ -27,13 +27,11 @@ public:
     }
 private:
     int findLargestIndex(vector<int> &nums, int i, int k) {
-        int largest = std::numeric_limits<int>::min();
-        int largestIndex = -1;
+        int largestIndex = i + k;
 
-        for (int j = i + 1; j <= i + k; ++j) {
+        for (int j = i + 1; j < i + k; ++j) {
             int current = get(nums, j, numeric_limits<int>::min());
-            if (current > largest) {
-                largest = current;
+            if (current > nums[largestIndex]) {
                 largestIndex = j;
             }
         }

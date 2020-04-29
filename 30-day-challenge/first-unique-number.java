@@ -1,70 +1,94 @@
 import java.util.*;
 
 class FirstUnique {
-    public Node head, tail;
-    Map<Integer, Node> nodes = new HashMap<>();
-    Set<Integer> seen = new HashSet<>();
+    private DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
 
     public FirstUnique(int[] nums) {
-        // Initialize queue
+        // Initialize list
         for (int num : nums) {
             add(num);
         }
     }
 
     public int showFirstUnique() {
-        if (head != null) {
-            return head.val;
-        }
-        return -1;
+        return (list.getHead() != null) ? list.getHead().val : -1;
     }
 
     public void add(int value) {
-        if (!seen.contains(value)) {
-            // Create new list Node
-            Node newNode = new Node(value);
-            nodes.put(value, newNode);
-
-            // Register as a seen value
-            seen.add(value);
-
-            // Add to back of queue
-            if (head == null) {
-                head = newNode;
-                tail = newNode;
-            } else {
-                tail.next = newNode;
-                newNode.prev = tail;
-                tail = newNode;
-            }
-            return;
+        if (!list.seen(value)) {
+            list.addToTail(value);
+        } else if (list.has(value)) {
+            list.remove(value);
         }
+    }
+}
 
-        // Remove from list if present
-        if (nodes.containsKey(value)) {
-            Node node = nodes.get(value);
-            if (node == head && node == tail) {
-                head = null;
-                tail = null;
-            } else if (node == head) {
-                head = head.next;
-            } else {
-                node.prev.next = node.next;
-                if (node.next != null) {
-                    node.next.prev = node.prev;
-                } else {
-                    tail = node.prev;
-                }
-            }
-            nodes.remove(value);
+class DoublyLinkedList<T> {
+    private Map<T, Node<T>> nodes = new HashMap<>();
+    private Node<T> head, tail;
+
+    public void addToHead(T val) {
+        Node<T> node = registerNode(val);
+        if (head == null) {
+            head = tail = node;
+        } else {
+            node.next = head;
+            head.prev = node;
+            head = node;
         }
     }
 
-    static class Node {
-        public int val;
-        public Node next, prev;
+    public void addToTail(T val) {
+        Node<T> node = registerNode(val);
+        if (tail == null) {
+            head = tail = node;
+        } else {
+            tail.next = node;
+            node.prev = tail;
+            tail = node;
+        }
+    }
 
-        public Node(int val) {
+    public void remove(T val) {
+        Node<T> node = nodes.get(val);
+        if (node == head && node == tail) {
+            head = tail = null;
+        } else if (node == head) {
+            head = head.next;
+        } else {
+            node.prev.next = node.next;
+            if (node.next != null) {
+                node.next.prev = node.prev;
+            } else {
+                tail = node.prev;
+            }
+        }
+        nodes.put(val, null);
+    }
+
+    public Node<T> getHead() {
+        return head;
+    }
+
+    public boolean seen(T val) {
+        return nodes.containsKey(val);
+    }
+
+    public boolean has(T val) {
+        return nodes.containsKey(val) && nodes.get(val) != null;
+    }
+
+    private Node<T> registerNode(T val) {
+        Node<T> node = new Node<>(val);
+        nodes.put(val, node);
+        return node;
+    }
+
+    static class Node<T> {
+        public T val;
+        public Node<T> next, prev;
+
+        public Node(T val) {
             this.val = val;
         }
     }

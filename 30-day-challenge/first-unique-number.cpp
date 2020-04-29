@@ -25,9 +25,6 @@ public:
     }
 
     int showFirstUnique() {
-        if (queue.size()) {
-            return queue.front();
-        }
-        return -1;
+        return queue.size() ? queue.front() : -1;
     }
 };

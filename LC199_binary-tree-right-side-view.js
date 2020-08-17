@@ -17,20 +17,20 @@ var rightSideView = function (root) {
 
   if (!root) return res;
 
-  const queue = [{ node: root, level: 0 }];
+  const queue = new Queue([{ node: root, level: 0 }]);
 
-  while (queue.length) {
-    const { node, level } = queue.shift();
+  while (queue.size()) {
+    const { node, level } = queue.dequeue();
 
     if (node.left) {
-      queue.push({ node: node.left, level: level + 1 });
+      queue.enqueue({ node: node.left, level: level + 1 });
     }
 
     if (node.right) {
-      queue.push({ node: node.right, level: level + 1 });
+      queue.enqueue({ node: node.right, level: level + 1 });
     }
 
-    if (!queue[0] || queue[0].level !== level) {
+    if (!queue.peek() || queue.peek().level !== level) {
       res.push(node.val);
       currLevel++;
     }
@@ -38,3 +38,41 @@ var rightSideView = function (root) {
 
   return res;
 };
+
+class Queue {
+  constructor(initialVals = []) {
+    this.size = 0;
+    this.head = this.tail = new ListNode();
+    initialVals.forEach((val) => {
+      this.enqueue(val);
+    });
+  }
+
+  enqueue(val) {
+    this.size++;
+    this.tail.next = new ListNode(val);
+    this.tail = this.tail.next;
+  }
+
+  dequeue() {
+    if (!this.head.next) {
+      return null;
+    }
+
+    this.size--;
+    const first = this.head.next.val;
+    this.head.next = this.head.next.next;
+    return first;
+  }
+
+  peek() {
+    return this.head.next ? this.head.next.val : null;
+  }
+}
+
+class ListNode {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+  }
+}

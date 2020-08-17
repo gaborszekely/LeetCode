@@ -36,7 +36,6 @@ Note:
 
 const arrayNesting = (nums) => {
   const seen = new Set();
-  let max = 0;
 
   const buildSequence = (idx) => {
     let size = 0;
@@ -50,11 +49,7 @@ const arrayNesting = (nums) => {
     return size;
   };
 
-  for (let i = 0; i < nums.length; ++i) {
-    max = Math.max(max, buildSequence(i));
-  }
-
-  return max;
+  return nums.reduce((max, i) => Math.max(max, buildSequence(i)), 0);
 };
 
 /**

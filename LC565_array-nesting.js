@@ -1,9 +1,13 @@
 /*
 https://leetcode.com/problems/array-nesting/
 
-A zero-indexed array A of length N contains all integers from 0 to N-1. Find and return the longest length of set S, where S[i] = {A[i], A[A[i]], A[A[A[i]]], ... } subjected to the rule below.
+A zero-indexed array A of length N contains all integers from 0 to N-1.
+Find and return the longest length of set S, where S[i] = {A[i], A[A[i]], A[A[A[i]]], ... }
+subjected to the rule below.
 
-Suppose the first element in S starts with the selection of element A[i] of index = i, the next element in S should be A[A[i]], and then A[A[A[i]]]… By that analogy, we stop adding right before a duplicate element occurs in S.
+Suppose the first element in S starts with the selection of element A[i] of index = i,
+the next element in S should be A[A[i]], and then A[A[A[i]]]…
+By that analogy, we stop adding right before a duplicate element occurs in S.
 
  
 
@@ -30,10 +34,6 @@ Note:
  * O(n) time, O(n) space.
  */
 
-/**
- * @param {number[]} nums
- * @return {number}
- */
 const arrayNesting = (nums) => {
   const seen = new Set();
   let max = 0;
@@ -63,11 +63,7 @@ const arrayNesting = (nums) => {
  * However, this solution mutates the original array, which is generally not preferred.
  */
 
-/**
- * @param {number[]} nums
- * @return {number}
- */
-const arrayNesting = (nums) => {
+const arrayNesting2 = (nums) => {
   const SEEN = 20001; // A number outside the given range of 0-20,000, which will indicate that an index has been visited.
   let max = 0;
 

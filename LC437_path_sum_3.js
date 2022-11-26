@@ -19,11 +19,17 @@ The path does not need to start or end at the root or a leaf, but it must go dow
     const latestSum = stack.at(-1) ?? 0;
     const currentSum = latestSum + root.val;
     const diff = currentSum - targetSum;
-    result += prefixSums[diff] ?? 0;
+
+    if (diff in prefixSums) {
+        result += prefixSums[diff];
+    }
+
     prefixSums[currentSum] = (prefixSums[currentSum] || 0) + 1;
     stack.push(currentSum);
+
     result += pathSum(root.left, targetSum, prefixSums, stack)
             + pathSum(root.right, targetSum, prefixSums, stack);
+
     stack.pop();
     prefixSums[currentSum]--;
 

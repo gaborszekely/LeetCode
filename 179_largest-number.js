@@ -10,10 +10,13 @@ Since the result may be very large, so you need to return a string instead of an
  * @param {number[]} nums
  * @return {string}
  */
- var largestNumber = function(nums) {
-    return nums.sort((a, b) => {
-        const aConcat = Number(`${a}${b}`);
-        const bConcat = Number(`${b}${a}`);
-        return aConcat > bConcat ? -1 : 1;
-    }).join('').replace(/^0+/, '0');
+const largestNumber = nums => {
+  return nums
+    .sort((a, b) => {
+      const aConcat = Number(`${a}${b}`);
+      const bConcat = Number(`${b}${a}`);
+      return aConcat > bConcat ? -1 : 1;
+    })
+    .join('')
+    .replace(/^0+/, '0');
 };

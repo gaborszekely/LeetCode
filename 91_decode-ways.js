@@ -31,7 +31,7 @@ var numDecodings = function (s, i = 0, cache = {}) {
     const singleDigit = Number(s[i]);
     const doubleDigit = Number(s[i] + s[i + 1]);
 
-    if (singleDigit >= 1) {
+    if (singleDigit > 0) {
       cache[i] += numDecodings(s, i + 1, cache);
     }
 
@@ -41,4 +41,26 @@ var numDecodings = function (s, i = 0, cache = {}) {
   }
 
   return cache[i];
+};
+
+/** Approach 2: Bottom up DP. */
+var numDecodings = function (s) {
+  const dp = Array(s.length + 2).fill(0);
+  dp[dp.length - 1] = 0;
+  dp[dp.length - 2] = 1;
+
+  for (let i = s.length - 1; i >= 0; --i) {
+    const singleDigit = Number(s[i]);
+    const doubleDigit = Number(s[i] + s[i + 1]);
+
+    if (singleDigit > 0) {
+      dp[i] += dp[i + 1];
+    }
+
+    if (doubleDigit >= 10 && doubleDigit <= 26) {
+      dp[i] += dp[i + 2];
+    }
+  }
+
+  return dp[0];
 };

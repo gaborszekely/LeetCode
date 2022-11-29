@@ -22,6 +22,7 @@ The test cases are generated so that the answer fits in a 32-bit integer.
  * @param {string} s
  * @return {number}
  */
+/** Approach 1: Top-down with memoization. */
 var numDecodings = function (s, i = 0, cache = {}) {
   if (i === s.length) return 1;
 
@@ -43,11 +44,10 @@ var numDecodings = function (s, i = 0, cache = {}) {
   return cache[i];
 };
 
-/** Approach 2: Bottom up DP. */
+/** Approach 2: Bottom-up DP. */
 var numDecodings = function (s) {
-  const dp = Array(s.length + 2).fill(0);
-  dp[dp.length - 1] = 0;
-  dp[dp.length - 2] = 1;
+  const dp = Array(s.length + 1).fill(0);
+  dp[dp.length - 1] = 1;
 
   for (let i = s.length - 1; i >= 0; --i) {
     const singleDigit = Number(s[i]);

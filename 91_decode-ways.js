@@ -64,3 +64,28 @@ var numDecodings = function (s) {
 
   return dp[0];
 };
+
+/** Approach 3: Bottom-up DP with constant space. */
+var numDecodings = function (s) {
+  let prev2 = 0;
+  let prev = 1;
+
+  for (let i = s.length - 1; i >= 0; --i) {
+    const singleDigit = Number(s[i]);
+    const doubleDigit = Number(s[i] + s[i + 1]);
+    let newPrev = 0;
+
+    if (singleDigit > 0) {
+      newPrev += prev;
+    }
+
+    if (doubleDigit >= 10 && doubleDigit <= 26) {
+      newPrev += prev2;
+    }
+
+    prev2 = prev;
+    prev = newPrev;
+  }
+
+  return prev;
+};

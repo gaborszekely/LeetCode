@@ -23,7 +23,5 @@ var longestCommonSubsequence = function (text1, text2) {
     }
   }
 
-  const lastRow = dp.at(-1);
-
-  return lastRow[lastRow.length - 1];
+  return dp.at(-1).at(-1);
 };

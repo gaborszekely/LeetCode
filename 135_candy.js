@@ -6,16 +6,13 @@ var candy = function (ratings) {
   const candies = Array(ratings.length).fill(1);
 
   for (let i = 0; i < ratings.length; ++i) {
-    // For monotonically increasing values, assign 1 + # of candies of left neighbor.
-    if (
-      ratings[i] > get(ratings, i - 1, -Infinity) &&
-      ratings[i] < get(ratings, i + 1, Infinity)
-    ) {
-      candies[i] = get(candies, i - 1, 0) + 1;
-    }
-
-    // Handle non-increasing values.
-    else if (ratings[i] >= get(ratings, i + 1, -Infinity)) {
+    if (ratings[i] < get(ratings, i + 1, Infinity)) {
+      // If rating is monotonically increasing, assign 1 + # of candies of left neighbor.
+      if (ratings[i] > get(ratings, i - 1, -Infinity)) {
+        candies[i] = get(candies, i - 1, 0) + 1;
+      } // Otherwise, consider it as a valley and keep # of candies as 1.
+    } else {
+      // Handle non-increasing ratings.
       const rightIndex = recurse(candies, ratings, i + 1);
 
       if (ratings[i] > get(ratings, i - 1, -Infinity)) {

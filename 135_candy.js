@@ -35,7 +35,7 @@ function get(ary, i, defaultVal) {
   return i >= 0 && i < ary.length ? ary[i] : defaultVal;
 }
 
-/** For monotonically decreasing values, assign 1 + # of candies of right neighbor. */
+/** For decreasing values, assign 1 + # of candies of right neighbor. */
 function recurse(candies, ratings, i) {
   if (i === ratings.length || ratings[i] <= get(ratings, i + 1, Infinity)) {
     return i;

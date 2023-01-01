@@ -6,7 +6,7 @@ var candy = function (ratings) {
   const candies = Array(ratings.length).fill(1);
 
   for (let i = 0; i < ratings.length; ++i) {
-    // Monotonically increasing
+    // For monotonically increasing values, assign 1 + # of candies of left neighbor.
     if (
       ratings[i] > get(ratings, i - 1, -Infinity) &&
       ratings[i] < get(ratings, i + 1, Infinity)
@@ -14,7 +14,7 @@ var candy = function (ratings) {
       candies[i] = get(candies, i - 1, 0) + 1;
     }
 
-    // Non-increasing
+    // Handle non-increasing values.
     else if (ratings[i] >= get(ratings, i + 1, -Infinity)) {
       const rightIndex = recurse(candies, ratings, i + 1);
 

@@ -16,21 +16,19 @@ var canCompleteCircuit = function (gas, cost) {
   return -1;
 
   function traverse(startIndex) {
-    let index = startIndex;
     let currentFuel = 0;
+    let index = startIndex;
 
     while (true) {
-      const fuel = gas[index];
-      const costToNext = cost[index];
-      const newFuel = currentFuel + fuel - costToNext;
+      currentFuel += gas[index] - cost[index];
 
-      if (newFuel < 0) {
+      if (currentFuel < 0) {
         return false;
       }
 
       // Check if there was already a path to the current gas station with a higher net remaining fuel. If so, this cannot be the optimal route.
-      if (cache[index] === undefined || cache[index] < newFuel) {
-        cache[index] = newFuel;
+      if (cache[index] === undefined || cache[index] < currentFuel) {
+        cache[index] = currentFuel;
       } else {
         return false;
       }
@@ -41,7 +39,6 @@ var canCompleteCircuit = function (gas, cost) {
         return true;
       }
 
-      currentFuel = newFuel;
       index = nextIndex;
     }
   }

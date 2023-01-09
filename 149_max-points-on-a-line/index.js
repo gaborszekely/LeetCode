@@ -12,8 +12,8 @@ var maxPoints = function (points) {
       if (point === point2) continue;
       const line = getSlopeIntercept(point, point2);
       lines[line] ||= new Set();
-      lines[line].add(point.join(':'));
-      lines[line].add(point2.join(':'));
+      lines[line].add(point);
+      lines[line].add(point2);
       max = Math.max(max, lines[line].size);
     }
   }

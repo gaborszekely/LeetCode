@@ -23,6 +23,6 @@ var maxPoints = function (points) {
 
 function getSlopeIntercept([x1, y1], [x2, y2]) {
   const slope = (y2 - y1) / (x2 - x1);
-  const offset = x1 === x2 ? x1 : y1 - slope * x1;
-  return `${slope}:${offset}`;
+  const intercept = x1 === x2 ? x1 : y1 - slope * x1;
+  return `${slope}:${intercept}`;
 }

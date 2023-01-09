@@ -10,11 +10,11 @@ var maxPoints = function (points) {
   for (const point of points) {
     for (const point2 of points) {
       if (point === point2) continue;
-      const key = getSlopeIntercept(point, point2);
-      lines[key] ||= new Set();
-      lines[key].add(point.join(':'));
-      lines[key].add(point2.join(':'));
-      max = Math.max(max, lines[key].size);
+      const slopeIntercept = getSlopeIntercept(point, point2);
+      lines[slopeIntercept] ||= new Set();
+      lines[slopeIntercept].add(point.join(':'));
+      lines[slopeIntercept].add(point2.join(':'));
+      max = Math.max(max, lines[slopeIntercept].size);
     }
   }
 

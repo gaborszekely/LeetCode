@@ -4,17 +4,17 @@
  */
 var maxPoints = function (points) {
   if (points.length === 1) return 1;
-  const equations = {};
+  const lines = {};
   let max = 0;
 
   for (const point of points) {
     for (const point2 of points) {
       if (point === point2) continue;
       const key = getSlopeIntercept(point, point2);
-      equations[key] ||= new Set();
-      equations[key].add(point.join(':'));
-      equations[key].add(point2.join(':'));
-      max = Math.max(max, equations[key].size);
+      lines[key] ||= new Set();
+      lines[key].add(point.join(':'));
+      lines[key].add(point2.join(':'));
+      max = Math.max(max, lines[key].size);
     }
   }
 

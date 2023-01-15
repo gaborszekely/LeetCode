@@ -10,12 +10,12 @@ var smallestEquivalentString = function (s1, s2, baseStr) {
   // Keep a cache of [char] -> [smallest lexographical equivalent] to avoid
   // duplicate traversals.
   const cache = {};
-  const seen = new Set();
+
   let result = '';
 
   for (const char of baseStr) {
     if (!cache[char]) {
-      cache[char] = findSmallest(char, adjacencyList, seen);
+      cache[char] = findSmallest(char, adjacencyList, cache);
     }
     result += cache[char];
   }
@@ -45,17 +45,18 @@ function buildAdjacencyList(s1, s2) {
  * Traverses all reachable vertices from the given character and returns the one
  * with the smallest lexographical value.
  */
-function findSmallest(char, adjacencyList, seen) {
-  if (char === 'a') return char;
+function findSmallest(char, adjacencyList, cache, seen = new Set()) {
+  if (cache[char]) {
+    return cache[char];
+  }
   seen.add(char);
   let min = char;
   for (const neighbor of adjacencyList[char] || []) {
     if (!seen.has(neighbor)) {
-      const smallest = findSmallest(neighbor, adjacencyList, seen);
+      const smallest = findSmallest(neighbor, adjacencyList, cache, seen);
       min = smallest.localeCompare(min) < 0 ? smallest : min;
     }
   }
-  seen.delete(char);
 
   return min;
 }

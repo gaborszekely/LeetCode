@@ -24,7 +24,7 @@ var smallestEquivalentString = function (s1, s2, baseStr) {
 };
 
 /**
- * Builds an adjacency list for character relations represented as edges in a
+ * Builds an adjacency list of character relations represented as edges in a
  * graph.
  */
 function buildAdjacencyList(s1, s2) {
@@ -42,8 +42,8 @@ function buildAdjacencyList(s1, s2) {
 }
 
 /**
- * Traverses a character's connected nodes in the graph to find the one with the
- * lexographically smallest value.
+ * Traverses a character's connected nodes in the graph to find the
+ * lexographically smallest one.
  */
 function findSmallest(char, adjacencyList, seen) {
   if (char === 'a') return char;

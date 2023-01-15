@@ -7,7 +7,7 @@
 var smallestEquivalentString = function (s1, s2, baseStr) {
   const adjacencyList = buildAdjacencyList(s1, s2);
 
-  // Keep a cache of char -> smallest lexographical equivalent, so we avoid
+  // Keep a cache of char -> smallest lexographical equivalent to avoid
   // duplicate traversals.
   const cache = {};
   const seen = new Set();

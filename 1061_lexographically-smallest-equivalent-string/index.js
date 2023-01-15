@@ -7,7 +7,7 @@
 var smallestEquivalentString = function (s1, s2, baseStr) {
   const adjacencyList = buildAdjacencyList(s1, s2);
 
-  // Keep a cache of char -> smallest lexographical equivalent to avoid
+  // Keep a cache of [char] -> [smallest lexographical equivalent] to avoid
   // duplicate traversals.
   const cache = {};
   const seen = new Set();
@@ -42,8 +42,8 @@ function buildAdjacencyList(s1, s2) {
 }
 
 /**
- * Traverses a character's connected nodes in the graph to find the
- * lexographically smallest one.
+ * Traverses all reachable vertices from the given character and returns the one
+ * with the smallest lexographical value.
  */
 function findSmallest(char, adjacencyList, seen) {
   if (char === 'a') return char;

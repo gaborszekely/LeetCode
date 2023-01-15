@@ -10,7 +10,6 @@ var smallestEquivalentString = function (s1, s2, baseStr) {
   // Keep a cache of [char] -> [smallest lexographical equivalent] to avoid
   // duplicate traversals.
   const cache = {};
-
   let result = '';
 
   for (const char of baseStr) {
@@ -29,6 +28,7 @@ var smallestEquivalentString = function (s1, s2, baseStr) {
  */
 function buildAdjacencyList(s1, s2) {
   const adjacencyList = {};
+
   for (let i = 0; i < s1.length; ++i) {
     const s1Char = s1[i];
     const s2Char = s2[i];
@@ -49,8 +49,10 @@ function findSmallest(char, adjacencyList, cache, seen = new Set()) {
   if (cache[char]) {
     return cache[char];
   }
+
   seen.add(char);
   let min = char;
+
   for (const neighbor of adjacencyList[char] || []) {
     if (!seen.has(neighbor)) {
       const smallest = findSmallest(neighbor, adjacencyList, cache, seen);

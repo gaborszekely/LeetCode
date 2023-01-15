@@ -13,7 +13,9 @@ var smallestEquivalentString = function (s1, s2, baseStr) {
   let result = '';
 
   for (const char of baseStr) {
-    cache[char] ||= findSmallest(char, adjacencyList, seen);
+    if (!cache[char]) {
+      cache[char] = findSmallest(char, adjacencyList, seen);
+    }
     result += cache[char];
   }
 

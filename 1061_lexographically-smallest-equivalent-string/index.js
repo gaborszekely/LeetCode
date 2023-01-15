@@ -42,8 +42,8 @@ function buildAdjacencyList(s1, s2) {
 }
 
 /**
- * Traverses all reachable vertices from the given character and returns the one
- * with the smallest lexographical value.
+ * Traverses all reachable vertices from the given character and returns the
+ * one with the smallest lexographical value.
  */
 function findSmallest(char, adjacencyList, cache, seen = new Set()) {
   if (cache[char]) {

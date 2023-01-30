@@ -10,13 +10,14 @@ var findMedianSortedArrays = function (nums1, nums2) {
 };
 
 function findMedian(arr1, arr2) {
-  let l = 0;
-  let r = arr1.length - 1;
   const totalLength = arr1.length + arr2.length;
   const isEven = totalLength % 2 === 0;
 
   // How many values should be to the left of the median value.
   const toLeft = Math.floor(totalLength / 2);
+
+  let l = 0;
+  let r = arr1.length - 1;
 
   while (l <= r) {
     const mid = Math.floor((l + r) / 2);

@@ -4,8 +4,6 @@
  * @return {number}
  */
 var findMedianSortedArrays = function (nums1, nums2) {
-  if (!nums1.length) return getSingleArrayMedian(nums2);
-  if (!nums2.length) return getSingleArrayMedian(nums1);
   return (
     getPartitionedMedian(nums1, nums2) ?? getPartitionedMedian(nums2, nums1)
   );
@@ -41,7 +39,7 @@ function getPartitionedMedian(arr1, arr2) {
     }
 
     if (arr2Index <= -1) {
-      if (arr2Index === -1 && arr2[0] >= midVal) {
+      if (arr2Index === -1 && (arr2[0] ?? Infinity) >= midVal) {
         return getMedian();
       }
       r = mid - 1;
@@ -61,10 +59,4 @@ function getPartitionedMedian(arr1, arr2) {
       r = mid - 1;
     }
   }
-}
-
-// Gets the median of a single array.
-function getSingleArrayMedian(arr) {
-  const mid = Math.floor(arr.length / 2);
-  return arr.length % 2 === 1 ? arr[mid] : (arr[mid - 1] + arr[mid]) / 2;
 }

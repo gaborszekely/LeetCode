@@ -25,7 +25,7 @@ function getPartitionedMedian(arr1, arr2) {
 
     const getMedian = () =>
       isEven
-        ? (arr1[mid] +
+        ? (midVal +
             Math.max(
               arr1[mid - 1] ?? -Infinity,
               arr2[arr2Index] ?? -Infinity

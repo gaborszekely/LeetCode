@@ -5,11 +5,11 @@
  */
 var findMedianSortedArrays = function (nums1, nums2) {
   return (
-    getPartitionedMedian(nums1, nums2) ?? getPartitionedMedian(nums2, nums1)
+    findMedian(nums1, nums2) ?? findMedian(nums2, nums1)
   );
 };
 
-function getPartitionedMedian(arr1, arr2) {
+function findMedian(arr1, arr2) {
   let l = 0;
   let r = arr1.length - 1;
   const totalLength = arr1.length + arr2.length;

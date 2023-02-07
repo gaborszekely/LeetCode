@@ -5,18 +5,19 @@
  */
 var findMedianSortedArrays = function (nums1, nums2) {
   return (
-    getPartitionedMedian(nums1, nums2) ?? getPartitionedMedian(nums2, nums1)
+    findMedian(nums1, nums2) ?? findMedian(nums2, nums1)
   );
 };
 
-function getPartitionedMedian(arr1, arr2) {
-  let l = 0;
-  let r = arr1.length - 1;
+function findMedian(arr1, arr2) {
   const totalLength = arr1.length + arr2.length;
   const isEven = totalLength % 2 === 0;
 
   // How many values should be to the left of the median value.
   const toLeft = Math.floor(totalLength / 2);
+
+  let l = 0;
+  let r = arr1.length - 1;
 
   while (l <= r) {
     const mid = Math.floor((l + r) / 2);
@@ -25,7 +26,7 @@ function getPartitionedMedian(arr1, arr2) {
 
     const getMedian = () =>
       isEven
-        ? (arr1[mid] +
+        ? (midVal +
             Math.max(
               arr1[mid - 1] ?? -Infinity,
               arr2[arr2Index] ?? -Infinity

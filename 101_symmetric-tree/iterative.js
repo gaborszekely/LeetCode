@@ -18,7 +18,7 @@ var isSymmetric = function (root) {
     const [current, level] = queue.pop();
 
     levels[level] ||= [];
-    levels[level].push(current?.val ?? null);
+    levels[level].push(current?.val);
 
     if (current) {
       queue.unshift([current.left, level + 1]);

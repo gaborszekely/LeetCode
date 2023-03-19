@@ -11,22 +11,32 @@
  * @return {boolean}
  */
 var isSymmetric = function (root) {
-  const levels = [];
+  let currentLevel = 0;
+  const currentLevelValues = [];
   const queue = [[root, 0]];
 
   while (queue.length) {
     const [current, level] = queue.pop();
 
-    levels[level] ||= [];
-    levels[level].push(current?.val);
+    if (level !== currentLevel) {
+      // check that the previous level is palindromic
+      if (!isPalindrome(currentLevelValues)) {
+        return false;
+      }
+
+      // reset current level values
+      currentLevel = level;
+      currentLevelValues.length = 0;
+    }
+
+    currentLevelValues.push(current?.val);
 
     if (current) {
-      queue.unshift([current.left, level + 1]);
-      queue.unshift([current.right, level + 1]);
+      queue.unshift([current.left, level + 1], [current.right, level + 1]);
     }
   }
 
-  return levels.every(isPalindrome);
+  return isPalindrome(currentLevelItems);
 };
 
 function isPalindrome(level) {
